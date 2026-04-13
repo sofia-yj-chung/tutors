@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Tutors — Ariton EDU</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1C3A2B;
+    --gold: #C9A84C;
+    --cream: #F5EDD6;
+    --muted: #8EAA8E;
+    --card-bg: #243d2f;
+    --tag-bg: #2E5040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--green); color: var(--cream); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+  header {
+    text-align: center; padding: 80px 24px 60px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    position: relative; opacity: 0; animation: fadeUp 0.6s ease forwards;
+  }
+  header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--gold); }
+  .brand { font-size: 11px; font-weight: 500; letter-spacing: 5px; color: var(--gold); margin-bottom: 28px; text-transform: uppercase; }
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(42px, 7vw, 76px); font-weight: 400; line-height: 1.1; color: var(--cream); margin-bottom: 16px; }
+  h1 em { font-style: italic; color: var(--gold); }
+  .subtitle { font-size: 15px; color: var(--muted); font-weight: 300; max-width: 500px; margin: 0 auto 36px; line-height: 1.7; }
+
+  .cta-row { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+  .cta-btn { display: inline-flex; align-items: center; gap: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; padding: 12px 24px; text-decoration: none; letter-spacing: 0.5px; transition: all 0.2s; }
+  .cta-primary { background: var(--gold); color: var(--green); }
+  .cta-primary:hover { background: #d4af5a; }
+  .cta-secondary { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.5); }
+  .cta-secondary:hover { background: rgba(201,168,76,0.1); border-color: var(--gold); }
+
+  .stats { display: flex; justify-content: center; border-bottom: 1px solid rgba(201,168,76,0.15); opacity: 0; animation: fadeUp 0.6s 0.15s ease forwards; }
+  .stat { flex: 1; max-width: 200px; text-align: center; padding: 32px 16px; border-right: 1px solid rgba(201,168,76,0.15); }
+  .stat:last-child { border-right: none; }
+  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 34px; color: var(--gold); display: block; line-height: 1; margin-bottom: 6px; }
+  .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; }
+
+  .section-wrap { max-width: 1100px; margin: 0 auto; padding: 72px 24px 0; }
+  .section-label { font-size: 11px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 40px; display: flex; align-items: center; gap: 16px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(201,168,76,0.2); }
+
+  .system-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
+  .sys-card { background: var(--card-bg); padding: 32px 28px; position: relative; transition: background 0.3s; opacity: 0; animation: fadeUp 0.5s ease forwards; }
+  .sys-card:nth-child(1) { animation-delay: 0.1s; }
+  .sys-card:nth-child(2) { animation-delay: 0.18s; }
+  .sys-card:nth-child(3) { animation-delay: 0.26s; }
+  .sys-card:nth-child(4) { animation-delay: 0.34s; }
+  .sys-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: var(--gold); opacity: 0.35; transition: opacity 0.3s; }
+  .sys-card:hover { background: #2a4636; }
+  .sys-card:hover::before { opacity: 1; }
+  .sys-letter { font-size: 11px; color: var(--gold); letter-spacing: 2px; margin-bottom: 10px; text-transform: uppercase; }
+  .sys-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--cream); margin-bottom: 14px; line-height: 1.4; }
+  .sys-body { font-size: 13px; color: var(--muted); line-height: 1.8; margin-bottom: 16px; list-style: none; }
+  .sys-body li { padding-left: 14px; position: relative; margin-bottom: 4px; }
+  .sys-body li::before { content: '—'; position: absolute; left: 0; color: var(--gold); opacity: 0.5; font-size: 11px; top: 2px; }
+  .sys-conclusion { font-size: 12px; color: var(--gold); font-style: italic; border-top: 1px solid rgba(201,168,76,0.2); padding-top: 14px; line-height: 1.6; }
+
+  .bottom-banner { background: #152e20; border-top: 1px solid rgba(201,168,76,0.15); border-bottom: 1px solid rgba(201,168,76,0.15); padding: 44px 24px; text-align: center; margin-top: 2px; }
+  .bottom-banner p { font-family: 'Cormorant Garamond', serif; font-size: clamp(18px, 3vw, 26px); color: var(--cream); line-height: 1.7; max-width: 680px; margin: 0 auto; }
+  .bottom-banner p em { font-style: italic; color: var(--gold); }
+
+  .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
+  .filter-btn { background: transparent; border: 1px solid rgba(201,168,76,0.3); color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 12px; letter-spacing: 1px; padding: 7px 18px; cursor: pointer; transition: all 0.2s; }
+  .filter-btn:hover, .filter-btn.active { background: var(--gold); color: var(--green); border-color: var(--gold); font-weight: 500; }
+
+  .grid-section { max-width: 1100px; margin: 0 auto; padding: 64px 24px 0; }
+  .tutor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2px; }
+
+  .card { background: var(--card-bg); padding: 36px 32px; position: relative; overflow: hidden; transition: background 0.3s; opacity: 0; animation: fadeUp 0.5s ease forwards; }
+  .card.hidden { display: none; }
+  .card:nth-child(1)  { animation-delay: 0.03s; } .card:nth-child(2)  { animation-delay: 0.06s; }
+  .card:nth-child(3)  { animation-delay: 0.09s; } .card:nth-child(4)  { animation-delay: 0.12s; }
+  .card:nth-child(5)  { animation-delay: 0.15s; } .card:nth-child(6)  { animation-delay: 0.18s; }
+  .card:nth-child(7)  { animation-delay: 0.21s; } .card:nth-child(8)  { animation-delay: 0.24s; }
+  .card:nth-child(9)  { animation-delay: 0.27s; } .card:nth-child(10) { animation-delay: 0.30s; }
+  .card:nth-child(11) { animation-delay: 0.33s; } .card:nth-child(12) { animation-delay: 0.36s; }
+  .card:nth-child(13) { animation-delay: 0.39s; } .card:nth-child(14) { animation-delay: 0.42s; }
+  .card:nth-child(15) { animation-delay: 0.45s; } .card:nth-child(16) { animation-delay: 0.48s; }
+  .card:nth-child(17) { animation-delay: 0.51s; } .card:nth-child(18) { animation-delay: 0.54s; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--gold); transition: height 0.4s ease; }
+  .card:hover { background: #2a4636; }
+  .card:hover::before { height: 100%; }
+
+  .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+  .school-badge { display: inline-block; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.4); padding: 4px 10px; max-width: 200px; line-height: 1.5; }
+  .degree-badge { font-size: 11px; font-weight: 500; padding: 4px 10px; letter-spacing: 0.5px; white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
+  .degree-박사 { background: #3a2e50; color: #c4a8f0; }
+  .degree-석사 { background: #2a3d50; color: #a8c8f0; }
+  .degree-학사 { background: #2a3d35; color: #a8d4b8; }
+  .degree-교수 { background: #3d2a2a; color: #f0a8a8; }
+
+  .tutor-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 600; color: var(--cream); margin-bottom: 3px; line-height: 1.2; }
+  .tutor-major { font-size: 13px; color: var(--muted); margin-bottom: 20px; font-weight: 300; }
+  .divider { height: 1px; background: rgba(201,168,76,0.15); margin-bottom: 18px; }
+  .specialty-list { list-style: none; margin-bottom: 20px; }
+  .specialty-list li { font-size: 13px; color: var(--cream); opacity: 0.82; line-height: 1.7; padding-left: 14px; position: relative; }
+  .specialty-list li::before { content: '→'; position: absolute; left: 0; color: var(--gold); opacity: 0.6; font-size: 11px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+  .tag { background: var(--tag-bg); color: var(--muted); font-size: 11px; padding: 4px 10px; letter-spacing: 0.5px; }
+  .tag-문과 { background: #2a3545; color: #8ab4d4; }
+  .tag-이과 { background: #2a3d35; color: #8ad4a8; }
+
+  .cta-section { text-align: center; padding: 72px 24px 80px; border-top: 1px solid rgba(201,168,76,0.15); margin-top: 2px; }
+  .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 400; color: var(--cream); margin-bottom: 12px; }
+  .cta-section h2 em { font-style: italic; color: var(--gold); }
+  .cta-section p { font-size: 14px; color: var(--muted); margin-bottom: 36px; line-height: 1.7; }
+  .cta-big-row { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .cta-big { display: inline-flex; align-items: center; gap: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 16px 36px; text-decoration: none; letter-spacing: 0.5px; transition: all 0.25s; }
+  .cta-big-gold { background: var(--gold); color: var(--green); }
+  .cta-big-gold:hover { background: #d4af5a; transform: translateY(-1px); }
+  .cta-big-outline { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.6); }
+  .cta-big-outline:hover { background: rgba(201,168,76,0.08); transform: translateY(-1px); }
+
+  footer { text-align: center; padding: 40px 24px; border-top: 1px solid rgba(201,168,76,0.2); position: relative; }
+  footer::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--gold); }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--gold); margin-bottom: 8px; }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 8px; }
+  .footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 1px; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-sub { font-size: 11px; color: rgba(142,170,142,0.5); letter-spacing: 1px; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="brand">Ariton EDU</p>
+  <h1>Meet Our <em>Tutors</em></h1>
+  <p class="subtitle">모든 튜터는 소피아 대표 원장의 개인 네트워크를 통해 직접 검증된 인력입니다.</p>
+  <div class="cta-row">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkRQVMHSafDlxJpHxkSdsOHKdQSopkjhi-KxgEMsC77c_oqA/viewform?usp=header" target="_blank" class="cta-btn cta-primary">면담 신청하기 →</a>
+    <a href="http://pf.kakao.com/_Ubxaxis" target="_blank" class="cta-btn cta-secondary">카카오 채널 문의</a>
+  </div>
+</header>
+
+<div class="stats">
+  <div class="stat">
+    <span class="stat-num">석·박사</span>
+    <span class="stat-label">Degree Standard</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">100%</span>
+    <span class="stat-label">Personally Vetted</span>
+  </div>
+  <div class="stat">
+    <span class="stat-num">팀제</span>
+    <span class="stat-label">Team System</span>
+  </div>
+</div>
+
+<div class="section-wrap">
+  <p class="section-label">아리톤 튜터 체계</p>
+  <div class="system-grid">
+    <div class="sys-card">
+      <p class="sys-letter">A</p>
+      <p class="sys-title">튜터 선정 기준 🎓</p>
+      <ul class="sys-body">
+        <li>원칙적으로 석사·박사 학위 소지자</li>
+        <li>학사의 경우 객관적으로 검증된 결과에 한해 예외 선발</li>
+      </ul>
+      <p class="sys-conclusion">학력 및 결과와 전문성을 우선합니다</p>
+    </div>
+    <div class="sys-card">
+      <p class="sys-letter">B</p>
+      <p class="sys-title">내부 운영 체계 🧩</p>
+      <ul class="sys-body">
+        <li>소피아 대표 원장이 직접 로드맵 & EC 전략 설계</li>
+        <li>전략에 따라 전문 튜터 팀 구성</li>
+      </ul>
+      <p class="sys-conclusion">개별 튜터 의존이 아닌 팀 구조입니다</p>
+    </div>
+    <div class="sys-card">
+      <p class="sys-letter">C</p>
+      <p class="sys-title">전문 분야 튜터 매칭 기준 🔍</p>
+      <ul class="sys-body">
+        <li>전공 및 세부 전문 분야</li>
+        <li>프로젝트 성격과 요구 학문 깊이</li>
+        <li>시차 및 작업 리듬</li>
+      </ul>
+      <p class="sys-conclusion">최적의 튜터를 개별 매칭합니다</p>
+    </div>
+    <div class="sys-card">
+      <p class="sys-letter">D</p>
+      <p class="sys-title">튜터 검증 및 네트워크 🛡️</p>
+      <ul class="sys-body">
+        <li>소피아 원장의 개인 네트워크로 직접 검증</li>
+        <li>실제 협업 경험·결과·신뢰 기반 선별</li>
+      </ul>
+      <p class="sys-conclusion">무작위 채용이나 플랫폼식 매칭 없음</p>
+    </div>
+  </div>
+  <div class="bottom-banner">
+    <p>개별 튜터의 역량도 중요하지만 —<br><em>시스템·전략·검증된 사람들의 팀으로</em> 결과를 만듭니다</p>
+  </div>
+</div>
+
+<div class="grid-section">
+  <p class="section-label">Our Roster</p>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filter('all', this)">전체</button>
+    <button class="filter-btn" onclick="filter('문과', this)">문과</button>
+    <button class="filter-btn" onclick="filter('이과', this)">이과</button>
+    <button class="filter-btn" onclick="filter('박사', this)">박사</button>
+    <button class="filter-btn" onclick="filter('석사', this)">석사</button>
+    <button class="filter-btn" onclick="filter('교수', this)">교수</button>
+  </div>
+
+  <div class="tutor-grid" id="grid">
+
+    <div class="card" data-track="대학" data-degree="석사">
+      <div class="card-top">
+        <span class="school-badge">Harvard University</span>
+        <span class="degree-badge degree-석사">석사</span>
+      </div>
+      <p class="tutor-name">Su*** L.</p>
+      <p class="tutor-major">Education</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>(現) 아리톤 College Director/Lead</li>
+        <li>미국 대학 원서/에세이 및 대학 리스트 전략</li>
+        <li>(前) 한국 *** 특목고 College Director</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag tag-이과">이과</span>
+        <span class="tag">College Essays</span><span class="tag">Strategy</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="박사">
+      <div class="card-top">
+        <span class="school-badge">Harvard · SNU</span>
+        <span class="degree-badge degree-박사">박사</span>
+      </div>
+      <p class="tutor-name">Da*** K.</p>
+      <p class="tutor-major">Law, Business</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>Law 에세이 대회</li>
+        <li>Business Pitch/Deck 비즈 대회</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">Law</span><span class="tag">Business</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="석사">
+      <div class="card-top">
+        <span class="school-badge">Columbia · Wesleyan</span>
+        <span class="degree-badge degree-석사">석사</span>
+      </div>
+      <p class="tutor-name">An*** L.</p>
+      <p class="tutor-major">English, Creative Writing</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>IB English 및 AP English 수업/과외</li>
+        <li>Creative Writing 에세이 대회</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">Creative Writing</span><span class="tag">IB/AP English</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="이과 문과" data-degree="박사">
+      <div class="card-top">
+        <span class="school-badge">Georgia Tech</span>
+        <span class="degree-badge degree-박사">박사</span>
+      </div>
+      <p class="tutor-name">Su*** L.</p>
+      <p class="tutor-major">Finance</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>Finance 비즈 대회</li>
+        <li>Finance 비즈 논문</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-이과">이과</span><span class="tag tag-문과">문과</span><span class="tag">Finance</span><span class="tag">Research</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="이과" data-degree="박사">
+      <div class="card-top">
+        <span class="school-badge">Columbia University</span>
+        <span class="degree-badge degree-박사">박사</span>
+      </div>
+      <p class="tutor-name">Se*** J.</p>
+      <p class="tutor-major">Biology</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>Biology 논문 및 리서치</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-이과">이과</span><span class="tag">Biology</span><span class="tag">Research</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="이과" data-degree="박사">
+      <div class="card-top">
+        <span class="school-badge">Columbia · KAIST</span>
+        <span class="degree-badge degree-박사">박사</span>
+      </div>
+      <p class="tutor-name">Mi*** L.</p>
+      <p class="tutor-major">Computer Science</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>CS/DS 논문 및 리서치</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-이과">이과</span><span class="tag">CS</span><span class="tag">Data Science</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="이과" data-degree="석사">
+      <div class="card-top">
+        <span class="school-badge">University of Oxford</span>
+        <span class="degree-badge degree-석사">석사</span>
+      </div>
+      <p class="tutor-name">Su*** G.</p>
+      <p class="tutor-major">Medicine, Biology</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>IB Biology, IB Chemistry 수업/과외</li>
+        <li>Medicine 논문 및 EC 프로젝트/리서치</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-이과">이과</span><span class="tag">Medicine</span><span class="tag">IB Sciences</span>
+      </div>
+    </div>
+
+
+
+    <div class="card" data-track="이과" data-degree="학사">
+      <div class="card-top">
+        <span class="school-badge">University of Oxford</span>
+        <span class="degree-badge degree-학사">학사</span>
+      </div>
+      <p class="tutor-name">Su*** C.</p>
+      <p class="tutor-major">Physics, Chemistry</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>IYPT/KYPT 물리학 대회</li>
+        <li>IChO Chemistry 대회</li>
+        <li>(前) IYPT 국내 수상자</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-이과">이과</span><span class="tag">Physics</span><span class="tag">Chemistry</span><span class="tag">Olympiad</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="박사">
+      <div class="card-top">
+        <span class="school-badge">St Andrews · SNU</span>
+        <span class="degree-badge degree-박사">박사</span>
+      </div>
+      <p class="tutor-name">Cl*** L.</p>
+      <p class="tutor-major">History</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>History 에세이 대회 (Concord Review, NHD 등)</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">History</span><span class="tag">Concord Review</span><span class="tag">NHD</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="이과" data-degree="박사">
+      <div class="card-top">
+        <span class="school-badge">NYU · Vassar</span>
+        <span class="degree-badge degree-박사">박사</span>
+      </div>
+      <p class="tutor-name">Ke*** P.</p>
+      <p class="tutor-major">Environment</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>환경 대회 및 논문/리서치</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-이과">이과</span><span class="tag">Environment</span><span class="tag">Research</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="석사">
+      <div class="card-top">
+        <span class="school-badge">University of Cambridge</span>
+        <span class="degree-badge degree-석사">석사</span>
+      </div>
+      <p class="tutor-name">Ma*** S.</p>
+      <p class="tutor-major">Economics</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>IB Economics 수업/과외</li>
+        <li>Economics 경제 에세이 대회</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">Economics</span><span class="tag">IB Econ</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="박사">
+      <div class="card-top">
+        <span class="school-badge">University of Oxford</span>
+        <span class="degree-badge degree-박사">박사</span>
+      </div>
+      <p class="tutor-name">Ma*** S.</p>
+      <p class="tutor-major">Philosophy, Politics</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>IB Philosophy 수업/과외</li>
+        <li>Philosophy 철학 에세이 대회</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">Philosophy</span><span class="tag">Politics</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="교수">
+      <div class="card-top">
+        <span class="school-badge">Singapore SMU</span>
+        <span class="degree-badge degree-교수">교수</span>
+      </div>
+      <p class="tutor-name">Sa*** N.</p>
+      <p class="tutor-major">Philosophy, Business</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>Singapore SMU 교수진</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">Philosophy</span><span class="tag">Business</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="교수">
+      <div class="card-top">
+        <span class="school-badge">Columbia · Dartmouth</span>
+        <span class="degree-badge degree-교수">교수</span>
+      </div>
+      <p class="tutor-name">Va*** J.</p>
+      <p class="tutor-major">Creative Writing</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>Columbia Univ. 교수진</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">Creative Writing</span><span class="tag">Professor</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="석사">
+      <div class="card-top">
+        <span class="school-badge">University of Cambridge</span>
+        <span class="degree-badge degree-석사">석사</span>
+      </div>
+      <p class="tutor-name">Ja*** W.</p>
+      <p class="tutor-major">Philosophy, Law</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>Philosophy 에세이 대회</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">Philosophy</span><span class="tag">Law</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="석사">
+      <div class="card-top">
+        <span class="school-badge">University of Chicago</span>
+        <span class="degree-badge degree-석사">석사</span>
+      </div>
+      <p class="tutor-name">Jo*** D.</p>
+      <p class="tutor-major">Philosophy, Law</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>Philosophy 에세이 대회</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">Philosophy</span><span class="tag">Law</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="문과" data-degree="학사">
+      <div class="card-top">
+        <span class="school-badge">University of Chicago</span>
+        <span class="degree-badge degree-학사">학사</span>
+      </div>
+      <p class="tutor-name">Pa*** K.</p>
+      <p class="tutor-major">Philosophy, English</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>IBDP English, AP English</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-문과">문과</span><span class="tag">IB English</span><span class="tag">AP English</span>
+      </div>
+    </div>
+
+    <div class="card" data-track="이과" data-degree="학사">
+      <div class="card-top">
+        <span class="school-badge">University of Oxford</span>
+        <span class="degree-badge degree-학사">학사</span>
+      </div>
+      <p class="tutor-name">Se*** K.</p>
+      <p class="tutor-major">Physics, Mathematics</p>
+      <div class="divider"></div>
+      <ul class="specialty-list">
+        <li>STEM spike/passion projects 수행</li>
+      </ul>
+      <div class="tags">
+        <span class="tag tag-이과">이과</span><span class="tag">Physics</span><span class="tag">Mathematics</span><span class="tag">STEM</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="cta-section">
+  <h2>지금 바로 <em>시작하세요</em></h2>
+  <p>면담 신청 또는 카카오 채널로 문의주시면<br>소피아 대표 원장이 직접 답변드립니다.</p>
+  <div class="cta-big-row">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkRQVMHSafDlxJpHxkSdsOHKdQSopkjhi-KxgEMsC77c_oqA/viewform?usp=header" target="_blank" class="cta-big cta-big-gold">면담 신청하기 →</a>
+    <a href="http://pf.kakao.com/_Ubxaxis" target="_blank" class="cta-big cta-big-outline">카카오 채널 문의</a>
+  </div>
+</div>
+
+<footer>
+  <p class="footer-brand">Ariton EDU</p>
+  <div class="footer-links">
+    <a href="http://pf.kakao.com/_Ubxaxis" target="_blank">카카오 채널</a>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdkRQVMHSafDlxJpHxkSdsOHKdQSopkjhi-KxgEMsC77c_oqA/viewform?usp=header" target="_blank">면담 신청</a>
+    <a href="https://ariton.global" target="_blank">ariton.global</a>
+  </div>
+  <p class="footer-sub">© Ariton EDU · All rights reserved</p>
+</footer>
+
+<script>
+  function filter(type, btn) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.card').forEach(card => {
+      if (type === 'all') {
+        card.classList.remove('hidden');
+      } else if (['박사','석사','학사','교수'].includes(type)) {
+        card.classList.toggle('hidden', card.dataset.degree !== type);
+      } else {
+        card.classList.toggle('hidden', !card.dataset.track.includes(type));
+      }
+    });
+  }
+</script>
+</body>
+</html>
